@@ -4,7 +4,7 @@ package jp.co.ws.training.example;
 /**
  * Java基礎	クラス、メッソッド、パッケージ	クラスについての概要、クラスの宣言、使い方、オブジェクト指向について
  *
- * @author K.Matsuda
+ * @author wsKmatsuda
  *
  */
 public class TrainingBasic01 {

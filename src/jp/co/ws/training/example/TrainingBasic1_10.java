@@ -10,7 +10,7 @@ import java.util.List;
 public class TrainingBasic1_10 {
 
 	public static void main(String[] args) {
-		ex06();
+		ex07();
 	}
 
 	/**
