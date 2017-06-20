@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import jp.co.ws.training.common.LinkedHashMap5;
 /**
  * 配列・コレクション
  * @author wsKmatsuda
@@ -105,6 +107,7 @@ public class TrainingBasic1_13 {
 	 * LinkedHashMapを使う練習 その２
 	 * removeEldestEntryにより、指定した数以上の値が登録されると最初に登録した値は削除される
 	 * キャッシュの機能を実装するのに便利
+	 * FIFO方式のデータ構造（最初に登録したデータが最初に消えていく）
 	 */
 	private static void ex02(){
 
@@ -117,7 +120,7 @@ public class TrainingBasic1_13 {
 		//以降の処理の実装を変更する必要がない。
 		//Map<String,String> lm5 = new HashMap<String,String>(5);
 
-		Map<String,String> lm5 = new LinkedHashMap<String,String>(5);
+		Map<String,String> lm5 = new LinkedHashMap5<String,String>();
 		lm5.put("01","北海道");
 		lm5.put("02","東北");
 		lm5.put("03","関東");
@@ -130,42 +133,14 @@ public class TrainingBasic1_13 {
 		    System.out.println(key + " => " + lm5.get(key));
 		}
 		System.out.println("5個以上追加---------");
-
-		//TODO 思ってた動きと違うので後で再確認、修正する。
+		lm5.put("05","中国");
 		lm5.put("06","九州");
 	    for ( Map.Entry<String, String> e : lm5.entrySet() ) {
 	        System.out.println( e.getKey() + ":" + e.getValue() );
 	    }
+		System.out.println("↑最初に追加した北海道、東北が削除されている。---------");
 
 	}
-	/**
-	 * クラスの中に定義したクラス。
-	 * LinkedHashMapを継承して、リストの数の上限を5にしたクラスを新たに定義している。
-	 * LinkedHashMapを継承することにより、その機能をカスタマイズして使えるクラスLinkedHashMap5を定義する。
-	 *
-	 * ※Javaの場合、継承（extends）で指定できるクラスは１つだけ。
-	 *   Interfaceは複数指定できる。
-	 */
-	class LinkedHashMap5<K,V> extends LinkedHashMap<K,V> {
-
-		private static final long serialVersionUID = 1L;
-
-		/**
-		 * 親クラスのremoveEldestEntryというメソッドを
-		 * オーバーライド（上書きのイメージ）して、
-		 * サイズが5以上の場合にtrueを返すようにする。
-		 * サイズが5以上の場合は、最初に追加した要素が削除される。
-		 * 左の△で、親クラスのメソッドを確認できる。
-		 * 親クラスは常にfalseを返しているので継承しないで使ったLinkedHashMapは
-		 * 無制限に値を追加できる。
-		 * オーバーライドする場合は、親クラスと同じメソッド名、戻り値、引数を指定する必要がある。
-		 */
-		@Override
-	    protected boolean removeEldestEntry(Map.Entry<K,V> eldest) {
-	        return size() > 5;
-	    }
-	}
-
 
 
 }
